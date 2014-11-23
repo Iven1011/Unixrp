@@ -1,0 +1,47 @@
+<meta>
+	<info author="Iven" name ="Reallife" version="0.1" type="gamemode" description="Another Reallife Gamemode" />
+	
+	<!----- Files ----->
+	<file src="images/logo.png" type="client" />
+	
+	<!----- Configs ------>
+	<script src="configs/serverconf.lua" type="server" />
+	<script src="configs/clientconf.lua" type="client" />
+	<script src="configs/bothconf.lua" type="shared" />
+	
+	<!----- Core ----->
+	<script src="core/mysql.lua" type="server" />
+	<script src="core/datas.lua" type="server" />
+	
+	<!----- Dx-Klassen ----->
+	<script src="dx/klassen.lua" type="client" />
+	<script src="dx/usefull.lua" type="client" />
+	
+	<!----- Admin ----->
+	<script src="admin/main.lua" type="server" />
+	
+	<!----- Register/Login ----->
+	<script src="register_login/register_login_both.lua" type="client" />
+	<script src="register_login/register_login_server.lua" type="server" />
+	
+	<!----- Fraktionen -----> 
+	<script src="fraktionen/main.lua" type="server" />
+	<script src="fraktionen/invite_client.lua" type="client" />
+	
+	<!----- Spawn ----->
+	<script src="spawn/spawn.lua" type="server" />
+	
+	<!----- Places ----->
+	<script src="places/rathaus/server.lua" type="server" />
+	
+	<!----- Tutorial ----->
+	<script src="tutorial/client.lua" type="client" />
+	<script src="tutorial/server.lua" type="server" />
+	
+	<!----- Self ------>
+	<script src="self/cursor.lua" type="server" />
+	
+	<script src="self/interface/interface_client.lua" type="client" />
+	
+	
+</meta>
