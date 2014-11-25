@@ -42,24 +42,26 @@ end
 addCommandHandler("setadminrank",setadminrank_func)
 
 function setfraktion_func (element,cmd,target,fraktion,rang)
-	if playerGetElementData(player,"logged") == true then 
+	if playerGetElementData(element,"logged") == true then 
 		if target and tonumber(fraktion) then
 			local tplayer = getPlayerFromName(target)
 			if tplayer then
 				if tplayer ~= element or tplayer == element then
-					if playerGetElementData(player,"Adminrang") >= 4 then
+					if playerGetElementData(element,"Adminrang") >= 4 then
 						if playerGetElementData(tplayer,"logged") == true then
-							local rank 
-							local pname = getPlayerName(element) 
-							if tonumber(rang) then
-								rank = tonumber(rang)
-							else
-								rank = 0
+							if tonumber(fraktion) <= 5 and tonumber(fraktion) >= 1 and tonumber(rang) <= 5 and tonumber(rang) >= 1 then
+								local rank 
+								local pname = getPlayerName(element) 
+								if tonumber(rang) then
+									rank = tonumber(rang)
+								else
+									rank = 0
+								end
+								playerSetElementData(tplayer,"Fraktion",fraktion)
+								playerSetElementData(tplayer,"Rang",rank)
+								outputChatBox("Du wurdest von "..pname.." in die Fraktion "..getFactionName(tplayer).." gesettet!",tplayer,0,255,0)
+								if rank >= 0 then outputChatBox("Dir wurde der Rang "..rank.." gegeben!",tplayer,0,255,0) end
 							end
-							playerSetElementData(tplayer,"Fraktion",fraktion)
-							playerSetElementData(tplayer,"Rang",rank)
-							outputChatBox("Du wurdest von "..pname.." in die Fraktion "..fraktionid[playerGetElementData(tplayer,"Fraktion")].." gesettet!",tplayer,0,255,0)
-							if rank >= 0 then outputChatBox("Dir wurde der Rang "..playerGetElementData(tplayer,"Rang").." gegeben!",tplayer,0,255,0) end
 						end
 					end
 				end

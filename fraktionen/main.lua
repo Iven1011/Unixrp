@@ -22,6 +22,19 @@ factiontypes[8] = "Evil"
 factiontypes[9] = "Evil"
 factiontypes[10] = "Unknown"
 
+factionskins = {}
+factionskins[1] = {284, 283, 282, 281, 280, 267, 266, 265, 288}
+factionskins[2] = {163, 164, 165, 166, 286}
+factionskins[3] = {73, 179, 191, 287, 312}
+factionskins[4] = {59, 60, 147, 170, 185, 267, 188, 186, 288, 219, 141}
+factionskins[5] = {274, 275, 276, 70, 71, 176, 177}
+factionskins[6] = {300, 269, 270, 105, 106, 107, 195}
+factionskins[7] = {102, 104, 296, 303, 304}
+factionskins[8] = {272, 49, 57, 169, 117, 118}
+factionskins[9] = {108, 109, 110, 114, 115, 116, 293}
+factionskins[10] = {1}
+
+
 
 function getFaction (element)
 	local search = playerGetElementData(element,"Fraktion")
@@ -35,13 +48,44 @@ end
 
 function getFactionType (element)
 	local faction = playerGetElementData(element,"Fraktion")
-	return factiontypes[faction]
+	return tostring(factiontypes[faction])
 end
 
 function getFactionName (element)
 	local faction = playerGetElementData(element,"Fraktion")
-	return fraktionid[faction]
+	return tostring(fraktionid[faction])
 end
+
+function cskin_func (element)
+	if playerGetElementData(element,"logged") == true then
+		if playerGetElementData(element,"Fraktion") >= 1 then
+			if not getPedOccupiedVehicle(element) then
+				if isPlayerInBase(element) then
+					local counter = nil
+					local curmodel = getElementModel(element)
+					for i,skin in pairs(factionskins[playerGetElementData(element,"Fraktion")]) do 
+						if skin == getElementModel(element) then
+							counter = i  
+							if #factionskins[playerGetElementData(element,"Fraktion")] == counter then 
+								counter = nil
+							else
+								counter = counter + 1
+								setElementModel(element,factionskins[playerGetElementData(element,"Fraktion")][counter])
+								playerSetElementData(element,"Skin",getElementModel(element)) 
+							end
+							break
+						end
+					end
+					if counter == nil then
+						setElementModel(element,factionskins[playerGetElementData(element,"Fraktion")][1])
+						playerSetElementData(element,"Skin",getElementModel(element))
+					end
+				end
+			end
+		end
+	end	
+end
+addCommandHandler("cskin",cskin_func)
 
 function invite_func (element,cmd,target)
 	if playerGetElementData(element,"logged") == true then
@@ -141,4 +185,3 @@ function deleteinvite_func (element,name)
 end
 addEvent("deleteinvite_trigger",true)
 addEventHandler("deleteinvite_trigger",root,deleteinvite_func)
-
