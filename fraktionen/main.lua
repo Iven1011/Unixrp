@@ -53,7 +53,7 @@ end
 
 function getFactionName (element)
 	local faction = playerGetElementData(element,"Fraktion")
-	return tostring(fraktionid[faction])
+	return tostring(fraktionid[tonumber(faction)])
 end
 
 function cskin_func (element)
